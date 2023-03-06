@@ -250,37 +250,37 @@ architecture model of mac16 is
       if clk = '1' then
         if neg_trigger = "0b0" then
           if rst = '1' then
-            q <= (others => '0');
+            q <= (q'range => '0');
           elsif ce = '0' or hold = '1' then
             null;
           elsif ce = '1' and hold = '0' then
             q <= d;
           else
-            q <= (others => 'X');
+            q <= (q'range => 'X');
           end if;
         elsif neg_trigger = "0b1" then
           null;
         else
-          q <= (others => 'X');
+          q <= (q'range => 'X');
         end if;
       elsif clk = '0' then
         if neg_trigger = "0b1" then
           if rst = '1' then
-            q <= (others => '0');
+            q <= (q'range => '0');
           elsif ce = '0' or hold = '1' then
             null;
           elsif ce = '1' and hold = '0' then
             q <= d;
           else
-            q <= (others => 'X');
+            q <= (q'range => 'X');
           end if;
         elsif neg_trigger = "0b0" then
           null;
         else
-          q <= (others => 'X');
+          q <= (q'range => 'X');
         end if;
       else
-        q <= (others => 'X');
+        q <= (q'range => 'X');
       end if;
     end if;
   end procedure reg_bus;
