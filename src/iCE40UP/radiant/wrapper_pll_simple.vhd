@@ -46,7 +46,7 @@ library ieee;
 library iCE40UP;
   use iCE40UP.Components.all;
 
-entity wrapper_pll is
+entity wrapper_pll_simple is
   generic (
     divr      : string;
     divf      : string;
@@ -61,9 +61,9 @@ entity wrapper_pll is
     lclk_div2 : out   std_logic;
     lock      : out   std_logic
   );
-end entity wrapper_pll;
+end entity wrapper_pll_simple;
 
-architecture struct of wrapper_pll is
+architecture struct of wrapper_pll_simple is
 
   signal fb : std_logic;
 

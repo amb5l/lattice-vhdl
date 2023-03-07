@@ -246,42 +246,44 @@ architecture model of mac16 is
     signal    q : out std_logic_vector
   ) is
   begin
-    if clk'event then
-      if clk = '1' then
-        if neg_trigger = "0b0" then
-          if rst = '1' then
-            q <= (q'range => '0');
-          elsif ce = '0' or hold = '1' then
+    if rst = '1' then
+      q <= (q'range => '0');
+    elsif rst = '0' then
+      if clk'event then
+        if clk = '1' then
+          if neg_trigger = "0b0" then
+            if ce = '0' or hold = '1' then
+              null;
+            elsif ce = '1' and hold = '0' then
+              q <= d;
+            else
+              q <= (q'range => 'X');
+            end if;
+          elsif neg_trigger = "0b1" then
             null;
-          elsif ce = '1' and hold = '0' then
-            q <= d;
           else
             q <= (q'range => 'X');
           end if;
-        elsif neg_trigger = "0b1" then
-          null;
-        else
-          q <= (q'range => 'X');
-        end if;
-      elsif clk = '0' then
-        if neg_trigger = "0b1" then
-          if rst = '1' then
-            q <= (q'range => '0');
-          elsif ce = '0' or hold = '1' then
+        elsif clk = '0' then
+          if neg_trigger = "0b1" then
+            if ce = '0' or hold = '1' then
+              null;
+            elsif ce = '1' and hold = '0' then
+              q <= d;
+            else
+              q <= (q'range => 'X');
+            end if;
+          elsif neg_trigger = "0b0" then
             null;
-          elsif ce = '1' and hold = '0' then
-            q <= d;
           else
             q <= (q'range => 'X');
           end if;
-        elsif neg_trigger = "0b0" then
-          null;
         else
           q <= (q'range => 'X');
         end if;
-      else
-        q <= (q'range => 'X');
       end if;
+    else
+      q <= (q'range => 'X');
     end if;
   end procedure reg_bus;
 
