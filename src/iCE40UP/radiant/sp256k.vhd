@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
--- wrapper_spram.vhd                                                          --
+-- sp256k.vhd                                                                 --
 --------------------------------------------------------------------------------
 -- (C) Copyright 2023 Adam Barnes <ambarnes@gmail.com>                        --
 -- This file is part of lattice-vhdl. lattice-vhdl is free software: you can  --
@@ -16,33 +16,12 @@
 
 library ieee;
   use ieee.std_logic_1164.all;
-
-package wrapper_spram_pkg is
-
-  component wrapper_spram is
-    port (
-      clk      : in   std_logic;
-      cs       : in   std_logic;
-      we       : in   std_logic;
-      mwe      : in   std_logic_vector(3 downto 0);
-      addr     : in   std_logic_vector(13 downto 0);
-      din      : in   std_logic_vector(15 downto 0);
-      dout     : out  std_logic_vector(15 downto 0)
-    );
-  end component wrapper_spram;
-
-end package wrapper_spram_pkg;
-
---------------------------------------------------------------------------------
-
-library ieee;
-  use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
 
 library iCE40UP;
   use iCE40UP.Components.all;
 
-entity wrapper_spram is
+entity sp256k is
   port (
     clk      : in   std_logic;
     cs       : in   std_logic;
@@ -52,9 +31,9 @@ entity wrapper_spram is
     din      : in   std_logic_vector(15 downto 0);
     dout     : out  std_logic_vector(15 downto 0)
   );
-end entity wrapper_spram;
+end entity sp256k;
 
-architecture behav of wrapper_spram is
+architecture infer of sp256k is
 
   type ram_t is array(0 to 16383) of std_logic_vector(15 downto 0);
   signal ram : ram_t;
@@ -80,23 +59,4 @@ begin
     end if;
   end process;
 
-end architecture behav;
-
-architecture struct of wrapper_spram is
-begin
-
-    U_SPRAM: component sp256k
-      port map (
-        pwroff_n  => '1',
-        sleep     => '0',
-        stdby     => '0',
-        ck        => clk,
-        cs        => cs,
-        we        => we,
-        maskwe    => mwe,
-        ad        => addr,
-        di        => din,
-        do        => dout
-      );
-
-end architecture struct;
+end architecture infer;
