@@ -34,7 +34,7 @@ package wrapper_rgb_pkg is
       mode    : string;
       current : string
     );
-    port(
+    port (
       pwm     : in    std_logic_vector(0 to 2);
       led     : out   std_logic_vector(0 to 2)
     );
