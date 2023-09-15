@@ -1,3 +1,5 @@
+-- shows that EBR is read-before-write
+
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
@@ -59,17 +61,17 @@ begin
       data_width_r => "16"
     )
     port map (
-      raddr  => raddr,
-      waddr  => waddr,
-      mask_n => (others => '1'),
-      wdata  => wdata,
-      rclke  => '1',
-      rclk   => clk,
-      re     => re,
-      wclke  => '1',
-      wclk   => clk,
-      we     => we,
-      rdata  => rdata
+      raddr => raddr,
+      waddr => waddr,
+      mask  => (others => '0'),
+      wdata => wdata,
+      rclke => '1',
+      rclk  => clk,
+      re    => re,
+      wclke => '1',
+      wclk  => clk,
+      we    => we,
+      rdata => rdata
     );
 
 end architecture sim;

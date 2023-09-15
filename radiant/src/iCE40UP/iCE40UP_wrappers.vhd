@@ -95,17 +95,17 @@ package iCE40UP_wrappers is
       data_width_r : string := "2"
     );
     port(
-      raddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
-      waddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
-      mask_n : in    std_logic_vector(15 downto 0) := (others => 'X');
-      wdata  : in    std_logic_vector(15 downto 0) := (others => 'X');
-      rclke  : in    std_logic := 'X';
-      rclk   : in    std_logic := 'X';
-      re     : in    std_logic := 'X';
-      wclke  : in    std_logic := 'X';
-      wclk   : in    std_logic := 'X';
-      we     : in    std_logic := 'X';
-      rdata  : out   std_logic_vector(15 downto 0) := (others => 'X')
+      raddr : in    std_logic_vector(10 downto 0) := (others => 'X');
+      waddr : in    std_logic_vector(10 downto 0) := (others => 'X');
+      mask  : in    std_logic_vector(15 downto 0) := (others => 'X');
+      wdata : in    std_logic_vector(15 downto 0) := (others => 'X');
+      rclke : in    std_logic := 'X';
+      rclk  : in    std_logic := 'X';
+      re    : in    std_logic := 'X';
+      wclke : in    std_logic := 'X';
+      wclk  : in    std_logic := 'X';
+      we    : in    std_logic := 'X';
+      rdata : out   std_logic_vector(15 downto 0) := (others => 'X')
     );
   end component wrapper_ebr;
 
@@ -403,17 +403,17 @@ entity wrapper_ebr is
     data_width_r : string := "2"
   );
   port(
-    raddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
-    waddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
-    mask_n : in    std_logic_vector(15 downto 0) := (others => 'X');
-    wdata  : in    std_logic_vector(15 downto 0) := (others => 'X');
-    rclke  : in    std_logic := 'X';
-    rclk   : in    std_logic := 'X';
-    re     : in    std_logic := 'X';
-    wclke  : in    std_logic := 'X';
-    wclk   : in    std_logic := 'X';
-    we     : in    std_logic := 'X';
-    rdata  : out   std_logic_vector(15 downto 0) := (others => 'X')
+    raddr : in    std_logic_vector(10 downto 0) := (others => 'X');
+    waddr : in    std_logic_vector(10 downto 0) := (others => 'X');
+    mask  : in    std_logic_vector(15 downto 0) := (others => 'X');
+    wdata : in    std_logic_vector(15 downto 0) := (others => 'X');
+    rclke : in    std_logic := 'X';
+    rclk  : in    std_logic := 'X';
+    re    : in    std_logic := 'X';
+    wclke : in    std_logic := 'X';
+    wclk  : in    std_logic := 'X';
+    we    : in    std_logic := 'X';
+    rdata : out   std_logic_vector(15 downto 0) := (others => 'X')
   );
 end entity wrapper_ebr;
 
@@ -464,22 +464,22 @@ begin
       waddr2    => waddr(2),
       waddr1    => waddr(1),
       waddr0    => waddr(0),
-      mask_n15  => mask_n(15),
-      mask_n14  => mask_n(14),
-      mask_n13  => mask_n(13),
-      mask_n12  => mask_n(12),
-      mask_n11  => mask_n(11),
-      mask_n10  => mask_n(10),
-      mask_n9   => mask_n(9),
-      mask_n8   => mask_n(8),
-      mask_n7   => mask_n(7),
-      mask_n6   => mask_n(6),
-      mask_n5   => mask_n(5),
-      mask_n4   => mask_n(4),
-      mask_n3   => mask_n(3),
-      mask_n2   => mask_n(2),
-      mask_n1   => mask_n(1),
-      mask_n0   => mask_n(0),
+      mask_n15  => mask(15),
+      mask_n14  => mask(14),
+      mask_n13  => mask(13),
+      mask_n12  => mask(12),
+      mask_n11  => mask(11),
+      mask_n10  => mask(10),
+      mask_n9   => mask(9),
+      mask_n8   => mask(8),
+      mask_n7   => mask(7),
+      mask_n6   => mask(6),
+      mask_n5   => mask(5),
+      mask_n4   => mask(4),
+      mask_n3   => mask(3),
+      mask_n2   => mask(2),
+      mask_n1   => mask(1),
+      mask_n0   => mask(0),
       wdata15   => wdata(15),
       wdata14   => wdata(14),
       wdata13   => wdata(13),
