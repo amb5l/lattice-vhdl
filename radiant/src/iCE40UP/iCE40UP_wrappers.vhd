@@ -43,41 +43,77 @@ package iCE40UP_wrappers is
       b_signed                 : string
     );
     port(
-      clk                      : in    std_logic;
-      ce                       : in    std_logic;
-      ahold                    : in    std_logic;
-      bhold                    : in    std_logic;
-      chold                    : in    std_logic;
-      dhold                    : in    std_logic;
-      irsttop                  : in    std_logic;
-      irstbot                  : in    std_logic;
-      orsttop                  : in    std_logic;
-      orstbot                  : in    std_logic;
-      oloadtop                 : in    std_logic;
-      oloadbot                 : in    std_logic;
-      addsubtop                : in    std_logic;
-      addsubbot                : in    std_logic;
-      oholdtop                 : in    std_logic;
-      oholdbot                 : in    std_logic;
-      ci                       : in    std_logic;
-      accumci                  : in    std_logic;
-      signextin                : in    std_logic;
-      a                        : in    std_logic_vector(15 downto 0);
-      b                        : in    std_logic_vector(15 downto 0);
-      c                        : in    std_logic_vector(15 downto 0);
-      d                        : in    std_logic_vector(15 downto 0);
-      o                        : out   std_logic_vector(31 downto 0);
-      co                       : out   std_logic;
-      accumco                  : out   std_logic;
-      signextout               : out   std_logic
+      clk       : in    std_logic;
+      ce        : in    std_logic;
+      ahold     : in    std_logic;
+      bhold     : in    std_logic;
+      chold     : in    std_logic;
+      dhold     : in    std_logic;
+      irsttop   : in    std_logic;
+      irstbot   : in    std_logic;
+      orsttop   : in    std_logic;
+      orstbot   : in    std_logic;
+      oloadtop  : in    std_logic;
+      oloadbot  : in    std_logic;
+      addsubtop : in    std_logic;
+      addsubbot : in    std_logic;
+      oholdtop  : in    std_logic;
+      oholdbot  : in    std_logic;
+      ci        : in    std_logic;
+      accumci   : in    std_logic;
+      signextin : in    std_logic;
+      a         : in    std_logic_vector(15 downto 0);
+      b         : in    std_logic_vector(15 downto 0);
+      c         : in    std_logic_vector(15 downto 0);
+      d         : in    std_logic_vector(15 downto 0);
+      o         : out   std_logic_vector(31 downto 0);
+      co        : out   std_logic;
+      accumco   : out   std_logic;
+      signextout: out   std_logic
     );
   end component wrapper_mac16;
 
+  component wrapper_ebr is
+    generic (
+      init_0       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_1       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_2       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_3       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_4       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_5       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_6       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_7       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_8       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_9       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_a       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_b       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_c       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_d       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_e       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      init_f       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+      data_width_w : string := "2";
+      data_width_r : string := "2"
+    );
+    port(
+      raddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
+      waddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
+      mask_n : in    std_logic_vector(15 downto 0) := (others => 'X');
+      wdata  : in    std_logic_vector(15 downto 0) := (others => 'X');
+      rclke  : in    std_logic := 'X';
+      rclk   : in    std_logic := 'X';
+      re     : in    std_logic := 'X';
+      wclke  : in    std_logic := 'X';
+      wclk   : in    std_logic := 'X';
+      we     : in    std_logic := 'X';
+      rdata  : out   std_logic_vector(15 downto 0) := (others => 'X')
+    );
+  end component wrapper_ebr;
+
   component wrapper_pll_simple is
     generic (
-      divr      : string;
-      divf      : string;
-      divq      : string
+      divr : string;
+      divf : string;
+      divq : string
     );
     port (
       rst       : in    std_logic;
@@ -106,8 +142,8 @@ package iCE40UP_wrappers is
       current : string
     );
     port (
-      pwm     : in    std_logic_vector(0 to 2);
-      led     : out   std_logic_vector(0 to 2)
+      pwm : in    std_logic_vector(0 to 2);
+      led : out   std_logic_vector(0 to 2)
     );
   end component wrapper_rgb;
 
@@ -158,33 +194,33 @@ entity wrapper_mac16 is
     b_signed                 : string
   );
   port(
-    clk                      : in    std_logic;
-    ce                       : in    std_logic;
-    ahold                    : in    std_logic;
-    bhold                    : in    std_logic;
-    chold                    : in    std_logic;
-    dhold                    : in    std_logic;
-    irsttop                  : in    std_logic;
-    irstbot                  : in    std_logic;
-    orsttop                  : in    std_logic;
-    orstbot                  : in    std_logic;
-    oloadtop                 : in    std_logic;
-    oloadbot                 : in    std_logic;
-    addsubtop                : in    std_logic;
-    addsubbot                : in    std_logic;
-    oholdtop                 : in    std_logic;
-    oholdbot                 : in    std_logic;
-    ci                       : in    std_logic;
-    accumci                  : in    std_logic;
-    signextin                : in    std_logic;
-    a                        : in    std_logic_vector(15 downto 0);
-    b                        : in    std_logic_vector(15 downto 0);
-    c                        : in    std_logic_vector(15 downto 0);
-    d                        : in    std_logic_vector(15 downto 0);
-    o                        : out   std_logic_vector(31 downto 0);
-    co                       : out   std_logic;
-    accumco                  : out   std_logic;
-    signextout               : out   std_logic
+    clk        : in    std_logic;
+    ce         : in    std_logic;
+    ahold      : in    std_logic;
+    bhold      : in    std_logic;
+    chold      : in    std_logic;
+    dhold      : in    std_logic;
+    irsttop    : in    std_logic;
+    irstbot    : in    std_logic;
+    orsttop    : in    std_logic;
+    orstbot    : in    std_logic;
+    oloadtop   : in    std_logic;
+    oloadbot   : in    std_logic;
+    addsubtop  : in    std_logic;
+    addsubbot  : in    std_logic;
+    oholdtop   : in    std_logic;
+    oholdbot   : in    std_logic;
+    ci         : in    std_logic;
+    accumci    : in    std_logic;
+    signextin  : in    std_logic;
+    a          : in    std_logic_vector(15 downto 0);
+    b          : in    std_logic_vector(15 downto 0);
+    c          : in    std_logic_vector(15 downto 0);
+    d          : in    std_logic_vector(15 downto 0);
+    o          : out   std_logic_vector(31 downto 0);
+    co         : out   std_logic;
+    accumco    : out   std_logic;
+    signextout : out   std_logic
   );
 end entity wrapper_mac16;
 
@@ -333,6 +369,155 @@ begin
       co         => co,
       accumco    => accumco,
       signextout => signextout
+    );
+
+end architecture struct;
+
+--------------------------------------------------------------------------------
+
+library ieee;
+  use ieee.std_logic_1164.all;
+
+library iCE40UP;
+  use iCE40UP.Components.all;
+
+entity wrapper_ebr is
+  generic (
+    init_0       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_1       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_2       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_3       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_4       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_5       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_6       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_7       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_8       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_9       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_a       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_b       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_c       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_d       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_e       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    init_f       : string := "0x0000000000000000000000000000000000000000000000000000000000000000";
+    data_width_w : string := "2";
+    data_width_r : string := "2"
+  );
+  port(
+    raddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
+    waddr  : in    std_logic_vector(10 downto 0) := (others => 'X');
+    mask_n : in    std_logic_vector(15 downto 0) := (others => 'X');
+    wdata  : in    std_logic_vector(15 downto 0) := (others => 'X');
+    rclke  : in    std_logic := 'X';
+    rclk   : in    std_logic := 'X';
+    re     : in    std_logic := 'X';
+    wclke  : in    std_logic := 'X';
+    wclk   : in    std_logic := 'X';
+    we     : in    std_logic := 'X';
+    rdata  : out   std_logic_vector(15 downto 0) := (others => 'X')
+  );
+end entity wrapper_ebr;
+
+architecture struct of wrapper_ebr is
+begin
+
+  U_EBR: component ebr_b
+    generic map (
+      init_0       => init_0,
+      init_1       => init_1,
+      init_2       => init_2,
+      init_3       => init_3,
+      init_4       => init_4,
+      init_5       => init_5,
+      init_6       => init_6,
+      init_7       => init_7,
+      init_8       => init_8,
+      init_9       => init_9,
+      init_a       => init_a,
+      init_b       => init_b,
+      init_c       => init_c,
+      init_d       => init_d,
+      init_e       => init_e,
+      init_f       => init_f,
+      data_width_w => data_width_w,
+      data_width_r => data_width_r
+    )
+    port map (
+      raddr10   => raddr(10),
+      raddr9    => raddr(9),
+      raddr8    => raddr(8),
+      raddr7    => raddr(7),
+      raddr6    => raddr(6),
+      raddr5    => raddr(5),
+      raddr4    => raddr(4),
+      raddr3    => raddr(3),
+      raddr2    => raddr(2),
+      raddr1    => raddr(1),
+      raddr0    => raddr(0),
+      waddr10   => waddr(10),
+      waddr9    => waddr(9),
+      waddr8    => waddr(8),
+      waddr7    => waddr(7),
+      waddr6    => waddr(6),
+      waddr5    => waddr(5),
+      waddr4    => waddr(4),
+      waddr3    => waddr(3),
+      waddr2    => waddr(2),
+      waddr1    => waddr(1),
+      waddr0    => waddr(0),
+      mask_n15  => mask_n(15),
+      mask_n14  => mask_n(14),
+      mask_n13  => mask_n(13),
+      mask_n12  => mask_n(12),
+      mask_n11  => mask_n(11),
+      mask_n10  => mask_n(10),
+      mask_n9   => mask_n(9),
+      mask_n8   => mask_n(8),
+      mask_n7   => mask_n(7),
+      mask_n6   => mask_n(6),
+      mask_n5   => mask_n(5),
+      mask_n4   => mask_n(4),
+      mask_n3   => mask_n(3),
+      mask_n2   => mask_n(2),
+      mask_n1   => mask_n(1),
+      mask_n0   => mask_n(0),
+      wdata15   => wdata(15),
+      wdata14   => wdata(14),
+      wdata13   => wdata(13),
+      wdata12   => wdata(12),
+      wdata11   => wdata(11),
+      wdata10   => wdata(10),
+      wdata9    => wdata(9),
+      wdata8    => wdata(8),
+      wdata7    => wdata(7),
+      wdata6    => wdata(6),
+      wdata5    => wdata(5),
+      wdata4    => wdata(4),
+      wdata3    => wdata(3),
+      wdata2    => wdata(2),
+      wdata1    => wdata(1),
+      wdata0    => wdata(0),
+      rclke     => rclke,
+      rclk      => rclk,
+      re        => re,
+      wclke     => wclke,
+      wclk      => wclk,
+      we        => we,
+      rdata15   => rdata(15),
+      rdata14   => rdata(14),
+      rdata13   => rdata(13),
+      rdata12   => rdata(12),
+      rdata11   => rdata(11),
+      rdata10   => rdata(10),
+      rdata9    => rdata(9),
+      rdata8    => rdata(8),
+      rdata7    => rdata(7),
+      rdata6    => rdata(6),
+      rdata5    => rdata(5),
+      rdata4    => rdata(4),
+      rdata3    => rdata(3),
+      rdata2    => rdata(2),
+      rdata1    => rdata(1),
+      rdata0    => rdata(0)
     );
 
 end architecture struct;
