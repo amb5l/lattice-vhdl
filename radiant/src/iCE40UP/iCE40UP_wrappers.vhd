@@ -111,9 +111,11 @@ package iCE40UP_wrappers is
 
   component wrapper_pll_simple is
     generic (
-      divr : string;
-      divf : string;
-      divq : string
+      fref   : string;
+      divr   : string;
+      divf   : string;
+      divq   : string;
+      filter : string
     );
     port (
       rst       : in    std_logic;
@@ -532,9 +534,11 @@ library iCE40UP;
 
 entity wrapper_pll_simple is
   generic (
-    divr      : string;
-    divf      : string;
-    divq      : string
+    fref   : string;
+    divr   : string;
+    divf   : string;
+    divq   : string;
+    filter : string
   );
   port (
     rst       : in    std_logic;
@@ -555,22 +559,23 @@ begin
 
   U_PLL: component pll_b
     generic map (
-      divr                            => divr,
-      divf                            => divf,
-      divq                            => divq,
-      filter_range                    => "1",
-      feedback_path                   => "SIMPLE",
-      delay_adjustment_mode_feedback  => "FIXED",
-      fda_feedback                    => "0",
-      delay_adjustment_mode_relative  => "FIXED",
-      fda_relative                    => "0",
-      shiftreg_div_mode               => "0",
-      pllout_select_porta             => "GENCLK",
-      pllout_select_portb             => "GENCLK_HALF",
-      enable_icegate_porta            => "0",
-      enable_icegate_portb            => "0",
-      external_divide_factor          => "NONE",
-      test_mode                       => "0"
+      frequency_pin_referenceclk     => fref,
+      divr                           => divr,
+      divf                           => divf,
+      divq                           => divq,
+      filter_range                   => filter,
+      feedback_path                  => "SIMPLE", --
+      delay_adjustment_mode_feedback => "FIXED", --
+      fda_feedback                   => "0", --
+      delay_adjustment_mode_relative => "FIXED", --
+      fda_relative                   => "0", --
+      shiftreg_div_mode              => "0", --
+      pllout_select_porta            => "GENCLK", --
+      pllout_select_portb            => "GENCLK_HALF", --
+      enable_icegate_porta           => "0", --
+      enable_icegate_portb           => "0", --
+      external_divide_factor         => "NONE", --
+      test_mode                      => "0"
     )
     port map (
       reset_n       => not rst,
