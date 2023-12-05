@@ -77,7 +77,7 @@ package iCE40UP_wrappers is
 
   component wrapper_ebr is
     generic (
-      init         : string_vector(0 to 15) := (others => "0x0000000000000000000000000000000000000000000000000000000000000000");
+      init         : string_vector(0 to 15) := (0 to 15 => "0x0000000000000000000000000000000000000000000000000000000000000000");
       data_width_w : string := "2";
       data_width_r : string := "2"
     );
@@ -375,7 +375,7 @@ library work;
 
 entity wrapper_ebr is
   generic (
-    init         : string_vector(0 to 15) := (others => "0x0000000000000000000000000000000000000000000000000000000000000000");
+    init         : string_vector(0 to 15) := (0 to 15 => "0x0000000000000000000000000000000000000000000000000000000000000000");
     data_width_w : string := "2";
     data_width_r : string := "2"
   );
