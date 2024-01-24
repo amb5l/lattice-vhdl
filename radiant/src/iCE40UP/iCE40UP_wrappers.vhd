@@ -81,7 +81,7 @@ package iCE40UP_wrappers is
       data_width_w : string := "2";
       data_width_r : string := "2"
     );
-    port(
+    port (
       raddr : in    std_logic_vector(10 downto 0) := (others => 'X');
       waddr : in    std_logic_vector(10 downto 0) := (others => 'X');
       mask  : in    std_logic_vector(15 downto 0) := (others => 'X');
